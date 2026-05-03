@@ -10,25 +10,27 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-//    private final String SECRET = "mysupersecretkeymysupersecretkey";
-      @Value("${JWT_SECRET}")
-      private String secret;
 
-    private final Key key = Keys.hmacShaKeyFor(secret.getBytes());
+    @Value("${JWT_SECRET}")
+    private String secret;
 
-    public String generateToken(String email,String username) {
+    private Key getKey() {
+        return Keys.hmacShaKeyFor(secret.getBytes());
+    }
+
+    public String generateToken(String email, String username) {
         return Jwts.builder()
                 .setSubject(email)
                 .claim("username", username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-                .signWith(key)
+                .signWith(getKey())
                 .compact();
     }
 
     public String extractEmail(String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(key)
+                .setSigningKey(getKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody()
@@ -36,7 +38,6 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String token, String email) {
-        String extracted = extractEmail(token);
-        return extracted.equals(email);
+        return extractEmail(token).equals(email);
     }
 }
