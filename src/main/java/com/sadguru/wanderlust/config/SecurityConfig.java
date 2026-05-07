@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.List;
+
 @Configuration
 public class SecurityConfig {
 
@@ -43,7 +45,12 @@ public class SecurityConfig {
 
         org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
 
-        config.setAllowedOrigins(java.util.List.of("http://localhost:5173","https://wanderlust-frontend*.vercel.app"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost:5173",
+                "https://wanderlust-frontend-gilt.vercel.app",
+                "https://wanderlust-frontend-fqhl459zd-sadguru2004s-projects.vercel.app",
+                "https://wanderlust-frontend-2d9krm2vo-sadguru2004s-projects.vercel.app"
+        ));
         config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(java.util.List.of("*"));
         config.setAllowCredentials(true);
