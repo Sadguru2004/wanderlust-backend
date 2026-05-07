@@ -43,7 +43,7 @@ public class SecurityConfig {
 
         org.springframework.web.cors.CorsConfiguration config = new org.springframework.web.cors.CorsConfiguration();
 
-        config.setAllowedOrigins(java.util.List.of("http://localhost:5173","https://wanderlust-frontend-gilt.vercel.app","https://wanderlust-frontend-fqhl459zd-sadguru2004s-projects.vercel.app"));
+        config.setAllowedOrigins(java.util.List.of("http://localhost:5173","https://wanderlust-frontend*.vercel.app"));
         config.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE"));
         config.setAllowedHeaders(java.util.List.of("*"));
         config.setAllowCredentials(true);
